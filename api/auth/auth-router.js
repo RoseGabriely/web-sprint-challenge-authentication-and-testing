@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
+
 const {
   uniqueNameVerify,
   bodyVerify,

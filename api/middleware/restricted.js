@@ -14,7 +14,6 @@ module.exports = (req, res, next) => {
         message: "token invalid",
       });
     } else {
-      req.decoded = decoded;
       next();
     }
   });
