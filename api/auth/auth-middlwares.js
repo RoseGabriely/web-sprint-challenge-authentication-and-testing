@@ -21,7 +21,21 @@ const uniqueNameVerify = (req, res, next) => {
     .catch(next);
 };
 
+const usernameVerify = (req, res, next) => {
+  Users.findByFilter({ username: req.body.username })
+    .then((user) => {
+      if (!user) {
+        next({ status: 401, message: "invalid credentials" });
+      } else {
+        req.user = user[0];
+        next();
+      }
+    })
+    .catch(next);
+};
+
 module.exports = {
   bodyVerify,
   uniqueNameVerify,
+  usernameVerify,
 };
