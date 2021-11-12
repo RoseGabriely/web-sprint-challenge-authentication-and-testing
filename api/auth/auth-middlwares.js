@@ -10,7 +10,7 @@ const bodyVerify = (req, res, next) => {
 };
 
 const uniqueNameVerify = (req, res, next) => {
-  Users.findByFilter({ username: req.body.username })
+  Users.findByUsername({ username: req.body.username })
     .then((user) => {
       if (user) {
         next({ status: 409, message: "username taken" });
@@ -22,7 +22,7 @@ const uniqueNameVerify = (req, res, next) => {
 };
 
 const usernameVerify = (req, res, next) => {
-  Users.findByFilter({ username: req.body.username })
+  Users.findBy({ username: req.body.username })
     .then((user) => {
       if (!user) {
         next({ status: 401, message: "invalid credentials" });
