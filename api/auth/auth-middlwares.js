@@ -2,7 +2,7 @@ const Users = require("./auth-models");
 
 const bodyVerify = (req, res, next) => {
   const { username, password } = req.body;
-  if (!username.trim() || !password.trim()) {
+  if (!username || !password) {
     next({ status: 400, message: "username and password required" });
   } else {
     next();
