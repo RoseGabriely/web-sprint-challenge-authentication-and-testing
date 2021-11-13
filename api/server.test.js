@@ -38,3 +38,25 @@ describe("[POST] /api/auth/register", () => {
     });
   });
 });
+
+describe("[POST] /api/auth/login", () => {
+  test("responds with status 401 and error if user does not exist in the database", async () => {
+    const res = await request(server)
+      .post("/api/auth/login")
+      .send({ username: "xxxxxx", password: "xxxxx" });
+    expect(res.status).toBe(401);
+    expect(res.body).toMatchObject({
+      message: "invalid credentials",
+    });
+  });
+
+  test("responds with status 400 and error if username or password is missing", async () => {
+    const res = await request(server)
+      .post("/api/auth/login")
+      .send({ username: "" });
+    expect(res.status).toBe(400);
+    expect(res.body).toMatchObject({
+      message: "username and password required",
+    });
+  });
+});
